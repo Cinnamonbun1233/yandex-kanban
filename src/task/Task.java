@@ -1,11 +1,11 @@
-package Tasks;
+package task;
 
 public class Task {
 
     String title;
     String description;
     Status status;
-    Integer ID;
+    Integer id;
 
     public Task(String title, String description, Status status) {
         this.title = title;
@@ -29,21 +29,21 @@ public class Task {
         this.status = status;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "ID=" + ID +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
+                ", id=" + id +
                 '}';
     }
 }

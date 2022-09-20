@@ -1,4 +1,4 @@
-package Tasks;
+package task;
 
 import java.util.HashMap;
 
@@ -23,12 +23,12 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return "EpicTask{" +
-                "ID='" + getID() + '\'' +
-                ", title='" + getTitle() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", status='" + getStatus() + '\'' +
-                ", internalSubtask='" + getInternalSubtask() + '\'' +
+        return "Epic{" +
+                "internalSubtask=" + internalSubtask +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", id=" + id +
                 '}';
     }
 }
