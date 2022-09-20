@@ -1,6 +1,6 @@
 import Tasks.Epic;
 import Tasks.Status;
-import Tasks.SubTask;
+import Tasks.Subtask;
 import Tasks.Task;
 
 public class Main {
@@ -24,14 +24,14 @@ public class Main {
         taskManager.createNewEpic(epic1);
         taskManager.createNewEpic(epic2);
 
-        SubTask subTask1 = new SubTask("Помидоры", "Только спелые", Status.NEW, 3);
-        SubTask subTask2 = new SubTask("Анна Каренина", "Взять у сестры", Status.NEW, 4);
-        SubTask subTask3 = new SubTask("Бесы", "Взять в библиотеке", Status.NEW, 4);
-        taskManager.createNewSubtask(subTask1, epic1.getID());
-        taskManager.createNewSubtask(subTask2, epic2.getID());
-        taskManager.createNewSubtask(subTask3, epic2.getID());
+        Subtask subtask1 = new Subtask("Помидоры", "Только спелые", Status.NEW, 3);
+        Subtask subtask2 = new Subtask("Анна Каренина", "Взять у сестры", Status.NEW, 4);
+        Subtask subtask3 = new Subtask("Бесы", "Взять в библиотеке", Status.NEW, 4);
+        taskManager.createNewSubtask(subtask1, epic1.getID());
+        taskManager.createNewSubtask(subtask2, epic2.getID());
+        taskManager.createNewSubtask(subtask3, epic2.getID());
 
-        taskManager.viewAllTask();
+        taskManager.printAllMaps();
 
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println("Проверяем методы обновления задач, эпиков и подзадач");
@@ -42,35 +42,36 @@ public class Main {
         Epic epic3 = new Epic("Продукты", "Сходить в магазин", Status.NEW);
         taskManager.updateEpic(epic1.getID(), epic3);
 
-        SubTask subTask4 = new SubTask("Братья Карамазовы>", "Взять в библиотеке", Status.IN_PROGRESS, 4);
-        taskManager.updateSubtask(subTask3.getID(), subTask4);
+        Subtask subtask4 = new Subtask("Братья Карамазовы>", "Взять в библиотеке", Status.IN_PROGRESS,
+                4);
+        taskManager.updateSubtask(subtask3.getID(), subtask4);
 
-        taskManager.viewAllTask();
+        taskManager.printAllMaps();
 
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println("Проверяем методы получения задач, эпиков и подзадач");
 
-        System.out.println(taskManager.getTaskById(1));
-        System.out.println(taskManager.getEpicById(3));
-        System.out.println(taskManager.getSubtaskById(5));
+        System.out.println(taskManager.getTaskByID(1));
+        System.out.println(taskManager.getEpicByID(3));
+        System.out.println(taskManager.getSubtaskByID(5));
         System.out.println(taskManager.getSubtaskByEpic(3));
 
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println("Проверяем методы удаления задач, эпиков и подзадач по ID");
 
-        taskManager.deleteTaskById(1);
+        taskManager.deleteTaskByID(1);
         taskManager.deleteEpicById(3);
-        taskManager.deleteSubTaskById(7);
+        taskManager.deleteSubtaskByID(7);
 
-        taskManager.viewAllTask();
+        taskManager.printAllMaps();
 
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println("Проверяем методы удаления всех задач, эпиков и подзадач");
 
         taskManager.deleteAllTasks();
         taskManager.deleteAllEpics();
-        taskManager.deleteAllSubTasks();
+        taskManager.deleteAllSubtasks();
 
-        taskManager.viewAllTask();
+        taskManager.printAllMaps();
     }
 }

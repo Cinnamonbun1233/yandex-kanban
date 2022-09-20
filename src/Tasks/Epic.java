@@ -3,36 +3,32 @@ package Tasks;
 import java.util.HashMap;
 
 public class Epic extends Task {
-    HashMap<Integer, SubTask> internalSubtask = new HashMap();
+    HashMap<Integer, Subtask> internalSubtask = new HashMap<>();
 
-    public Epic(String name, String description, Status status) {
-        super(name, description, status);
+    public Epic(String title, String description, Status status) {
+        super(title, description, status);
     }
 
-    public void addNewSubtaskInEpic(Integer id, SubTask subTask) {
-        if (subTask != null) {
-            internalSubtask.put(id, subTask);
-        }
+    public void addSubtaskInEpic(Integer ID, Subtask subTask) {
+        internalSubtask.put(ID, subTask);
     }
 
-    public HashMap<Integer, SubTask> getInternalSubtask() {
+    public HashMap<Integer, Subtask> getInternalSubtask() {
         return internalSubtask;
     }
 
-    public void setInternalSubtask(HashMap<Integer, SubTask> internalSubtask) {
-        if (internalSubtask != null) {
-            this.internalSubtask = internalSubtask;
-        }
+    public void setInternalSubtask(HashMap<Integer, Subtask> internalSubtask) {
+        this.internalSubtask = internalSubtask;
     }
 
     @Override
     public String toString() {
         return "EpicTask{" +
-                "id='" + getID() + '\'' +
-                ", name='" + getTitle() + '\'' +
+                "ID='" + getID() + '\'' +
+                ", title='" + getTitle() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +
-                ", innerSubTask='" + getInternalSubtask() + '\'' +
+                ", internalSubtask='" + getInternalSubtask() + '\'' +
                 '}';
     }
 }

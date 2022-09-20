@@ -17,16 +17,8 @@ public class Task {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Status getStatus() {
@@ -48,8 +40,8 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + ID +
-                ", name='" + title + '\'' +
+                "ID=" + ID +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
                 '}';
