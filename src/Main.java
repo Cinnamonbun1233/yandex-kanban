@@ -1,21 +1,60 @@
 import manager.Managers;
 import manager.TaskManager;
-import task.Epic;
 import task.Status;
-import task.Subtask;
 import task.Task;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        /* Что-то я совсем поплыл в последнем спринте. Буду все каникулы разбираться в приницпах ООП, понял в лучшем
-        случае половину материала. Чувствую, что сделал в ДЗ что-то неправильно, но не могу понять, что и именно.
-         */
-
         TaskManager taskManager = Managers.getDefault();
 
-        System.out.println("Тестирование методов");
+        Task task1 = new Task("Задача 1", "Тестовая задача 1", Status.NEW);
+        Task task2 = new Task("Задача 2", "Тестовая задача 2", Status.NEW);
+        Task task3 = new Task("Задача 3", "Тестовая задача 3", Status.NEW);
+        Task task4 = new Task("Задача 4", "Тестовая задача 4", Status.NEW);
+        Task task5 = new Task("Задача 5", "Тестовая задача 5", Status.NEW);
+
+        taskManager.createNewTask(task1);
+        taskManager.createNewTask(task2);
+        taskManager.createNewTask(task3);
+        taskManager.createNewTask(task4);
+        taskManager.createNewTask(task5);
+
+        System.out.println("Тестирование истории");
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("Проверяем получение истории");
+
+        System.out.println(taskManager.getHistory());
+
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("Проверяем добавление первой задачи");
+
+        taskManager.getTaskById(1);
+        System.out.println(taskManager.getHistory());
+
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("Проверяем добавление остальных задач");
+
+        taskManager.getTaskById(2);
+        taskManager.getTaskById(3);
+        taskManager.getTaskById(4);
+        taskManager.getTaskById(5);
+        System.out.println(taskManager.getHistory());
+
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("Проверяем удаление первой задачи");
+
+        taskManager.deleteTaskById(1);
+        System.out.println(taskManager.getHistory());
+
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("Проверяем удаление всех задач");
+
+        taskManager.deleteAllTasks();
+        System.out.println(taskManager.getHistory());
+
+        /*System.out.println("Тестирование методов");
         System.out.println("-----------------------------------------------------------------------------------------");
         System.out.println("Проверяем методы добавления задач, эпиков и подзадач");
 
@@ -83,6 +122,6 @@ public class Main {
         taskManager.deleteAllEpics();
         taskManager.deleteAllSubtasks();
 
-        taskManager.printAllMaps();
+        taskManager.printAllMaps();*/
     }
 }
