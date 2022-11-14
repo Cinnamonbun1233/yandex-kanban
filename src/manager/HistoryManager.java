@@ -1,14 +1,14 @@
 package manager;
 
-import task.Task;
+import task.NormalTask;
 
 import java.util.List;
 
 public interface HistoryManager {
 
-    void add(Task task);
+    void add(NormalTask normalTask);
 
     void remove(Integer taskId);
 
-    List<Task> getHistory();
+    List<NormalTask> getHistory();
 }

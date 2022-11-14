@@ -1,6 +1,6 @@
 package manager;
 
-import task.Task;
+import task.NormalTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,47 +9,39 @@ import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    Map<Integer, Node<Task>> mapNode = new HashMap<>();
-    Node<Task> first = null;
-    Node<Task> last = null;
+    Map<Integer, Node<NormalTask>> mapNode = new HashMap<>();
+    Node<NormalTask> first = null;
+    Node<NormalTask> last = null;
 
-
-    private List<Task> getTasks() {
-        List<Task> historyList = new ArrayList<>();
-        Node<Task> lastNode = last;
-        Node<Task> thisNode = first;
-        if (lastNode == null && thisNode == null) {
-            System.out.println("В истории пусто");
+    private List<NormalTask> getTasks() {
+        ArrayList<NormalTask> historyList = new ArrayList<>();
+        Node<NormalTask> lastNode = last;
+        Node<NormalTask> firstNode = first;
+        if (lastNode == null && firstNode == null) {
             return historyList;
         }
         do {
-            historyList.add(thisNode.getCurrent());
-            thisNode = thisNode.getNext();
-        } while (thisNode != null);
+            historyList.add(firstNode.getCurrent());
+            firstNode = firstNode.getNext();
+        } while (firstNode != null);
         return historyList;
     }
 
-    private void linkFirst(Task task) {
-        if (task == null) {
-            return;
-        }
-        Node<Task> nodeFirst = new Node<>(null, task, null);
-        mapNode.put(task.getId(), nodeFirst);
+    private void linkFirst(NormalTask normalTask) {
+        Node<NormalTask> nodeFirst = new Node<>(null, normalTask, null);
+        mapNode.put(normalTask.getId(), nodeFirst);
         first = nodeFirst;
         last = nodeFirst;
     }
 
-    private void linkLast(Task task) {
-        if (task == null) {
-            return;
-        }
-        Node<Task> nodeLast = new Node<>(last, task, null);
+    private void linkLast(NormalTask normalTask) {
+        Node<NormalTask> nodeLast = new Node<>(last, normalTask, null);
         last.setNext(nodeLast);
         last = nodeLast;
-        mapNode.put(task.getId(), nodeLast);
+        mapNode.put(normalTask.getId(), nodeLast);
     }
 
-    private void removeNode(Node<Task> node) {
+    private void removeNode(Node<NormalTask> node) {
         if (node == null) {
             return;
         }
@@ -57,16 +49,16 @@ public class InMemoryHistoryManager implements HistoryManager {
             first = null;
             last = null;
         } else if (node.getPrevious() == null) {
-            Node<Task> newFirstNode = node.getNext();
+            Node<NormalTask> newFirstNode = node.getNext();
             newFirstNode.setPrevious(null);
             first = newFirstNode;
         } else if (node.getNext() == null) {
-            Node<Task> newLastNode = node.getPrevious();
+            Node<NormalTask> newLastNode = node.getPrevious();
             newLastNode.setNext(null);
             last = newLastNode;
         } else if (node.getPrevious() != null && node.getNext() != null) {
-            Node<Task> prevNode = node.getPrevious();
-            Node<Task> nextNode = node.getNext();
+            Node<NormalTask> prevNode = node.getPrevious();
+            Node<NormalTask> nextNode = node.getNext();
             prevNode.setNext(nextNode);
             nextNode.setPrevious(prevNode);
         }
@@ -79,20 +71,17 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void add(Task task) {
-        if (task == null) {
-            return;
-        }
+    public void add(NormalTask normalTask) {
         if (mapNode.size() == 0) {
-            linkFirst(task);
+            linkFirst(normalTask);
         } else {
-            removeNode(mapNode.get(task.getId()));
-            linkLast(task);
+            removeNode(mapNode.get(normalTask.getId()));
+            linkLast(normalTask);
         }
     }
 
     @Override
-    public List<Task> getHistory() {
+    public List<NormalTask> getHistory() {
         return getTasks();
     }
 }
