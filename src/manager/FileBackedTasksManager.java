@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 
 import static java.nio.file.Files.createDirectory;
@@ -128,7 +129,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         final String HEAD_SAVE_FILE = "id,type,name,status,description,epic";
         StringJoiner managerData = new StringJoiner("\n");
         managerData.add(HEAD_SAVE_FILE);
-        HashMap<Integer, NormalTask> allTask = new HashMap<>();
+        Map<Integer, NormalTask> allTask = new HashMap<>();
         allTask.putAll(normalTasks);
         allTask.putAll(epicTasks);
         allTask.putAll(SubTasks);
@@ -170,33 +171,29 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
     void tasksFromString(String taskString) {
         String[] splitTasksInString = taskString.split("\n");
-        Type type;
         for (int i = 1; i < splitTasksInString.length; i++) {
             String[] splitValue = splitTasksInString[i].split(",");
             Integer id = Integer.parseInt(splitValue[0]);
             String name = splitValue[2];
             Status status = setTaskType(splitValue[3]);
             String description = splitValue[4];
-            if (splitValue[1].equals("TASK")) {
-                type = Type.TASK;
-                NormalTask normalTask = new NormalTask(type, name, status, description);
+            if (splitValue[1].equals(Type.TASK.toString())) {
+                NormalTask normalTask = new NormalTask(Type.TASK, name, status, description);
                 normalTask.setId(id);
                 normalTasks.put(normalTask.getId(), normalTask);
                 if (taskId <= normalTask.getId()) {
                     taskId = normalTask.getId() + 1;
                 }
-            } else if (splitValue[1].equals("EPIC")) {
-                type = Type.EPIC;
-                EpicTask epicTask = new EpicTask(type, name, status, description);
+            } else if (splitValue[1].equals(Type.EPIC.toString())) {
+                EpicTask epicTask = new EpicTask(Type.EPIC, name, status, description);
                 epicTask.setId(id);
                 epicTasks.put(epicTask.getId(), epicTask);
                 if (taskId < epicTask.getId()) {
                     taskId = epicTask.getId() + 1;
                 }
             } else {
-                type = Type.SUBTASK;
                 int epicId = Integer.parseInt(splitValue[5]);
-                SubTask subTask = new SubTask(type, name, status, description, epicId);
+                SubTask subTask = new SubTask(Type.SUBTASK, name, status, description, epicId);
                 subTask.setId(id);
                 SubTasks.put(subTask.getId(), subTask);
                 if (taskId < subTask.getId()) {
