@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class Epic extends Task {
     HashMap<Integer, SubTask> innerSubTask = new HashMap<>();
@@ -23,7 +22,7 @@ public class Epic extends Task {
         this.endTime = endTime;
     }
 
-    public void refreshEpicTime() {
+    public void refreshTimeEpic() {
         if (getInnerSubTask().isEmpty()) {
             setStartTime(null);
             setEndTime(null);
@@ -53,10 +52,10 @@ public class Epic extends Task {
         }
     }
 
-    public void addSubtaskToEpic(SubTask subTask) {
+    public void addNewSubtaskInEpic(SubTask subTask) {
         if (subTask != null) {
             innerSubTask.put(subTask.getId(), subTask);
-            refreshEpicTime();
+            refreshTimeEpic();
             updateEpicStatus();
         }
     }
@@ -65,7 +64,7 @@ public class Epic extends Task {
         Status epicStatus;
         if (innerSubTask.isEmpty()) {
             epicStatus = Status.NEW;
-            System.out.println("empty new ");
+            System.out.println("Новый пустой эпик");
         } else {
             ArrayList<Status> subStatusList = new ArrayList<>();
             for (SubTask sub : innerSubTask.values()) {
@@ -95,19 +94,5 @@ public class Epic extends Task {
         if (innerSubTask != null) {
             this.innerSubTask = innerSubTask;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Epic epic = (Epic) o;
-        return Objects.equals(innerSubTask, epic.innerSubTask) && Objects.equals(endTime, epic.endTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), innerSubTask, endTime);
     }
 }

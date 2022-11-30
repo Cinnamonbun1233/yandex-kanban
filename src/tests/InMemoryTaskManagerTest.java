@@ -13,96 +13,96 @@ class InMemoryTaskManagerTest extends TaskManagerTest {
 
     @Test
     void addTaskTEST() {
-        super.addTaskTEST();
+        super.addTaskTest();
     }
 
     @Test
     void addEpicTEST() {
-        super.addEpicTEST();
+        super.addEpicTest();
     }
 
     @Test
     void addSubTaskTEST() {
-        super.addSubTaskTEST();
+        super.addSubTaskTest();
     }
 
     @Test
     void deleteAllTaskTEST() {
-        super.deleteAllTaskTEST();
+        super.deleteAllTaskTest();
     }
 
     @Test
     void deleteAllEpicTEST() {
-        super.deleteAllEpicTEST();
+        super.deleteAllEpicTest();
     }
 
     @Test
     void deleteAllSubTaskTEST() {
-        super.deleteAllSubTaskTEST();
+        super.deleteAllSubTaskTest();
     }
 
     @Test
     void deleteTaskByIdTEST() {
-        super.deleteTaskByIdTEST();
+        super.deleteTaskByIdTest();
     }
 
     @Test
     void deleteEpicByIdTEST() {
-        super.deleteEpicByIdTEST();
+        super.deleteEpicByIdTest();
     }
 
     @Test
     void deleteSubTaskByIdTEST() {
-        super.deleteSubTaskByIdTEST();
+        super.deleteSubTaskByIdTest();
     }
 
     @Test
     void getTaskByIdTEST() {
-        super.getTaskByIdTEST();
+        super.getTaskByIdTest();
     }
 
     @Test
     void getEpicByIdTEST() {
-        super.getEpicByIdTEST();
+        super.getEpicByIdTest();
     }
 
     @Test
     void getSubTaskByIdTEST() {
-        super.getSubTaskByIdTEST();
+        super.getSubTaskByIdTest();
     }
 
     @Test
     void updateTaskTEST() {
-        super.updateTaskTEST();
+        super.updateTaskTest();
     }
 
     @Test
     void updateEpicTEST() {
-        super.updateEpicTEST();
+        super.updateEpicTest();
     }
 
     @Test
     void updateSubTaskTEST() {
-        super.updateSubTaskTEST();
+        super.updateSubTaskTest();
     }
 
     @Test
     void viewAllTaskTEST() {
-        super.viewAllTaskTEST();
+        super.viewAllTaskTest();
     }
 
     @Test
     void viewSubTaskOfEpicTEST() {
-        super.viewSubTaskOfEpicTEST();
+        super.viewSubTaskOfEpicTest();
     }
 
     @Test
     void getTaskHistoryTEST() {
-        super.getTaskHistoryTEST();
+        super.getTaskHistoryTest();
     }
 
     @Test
     void getPrioritizedTasksTEST() {
-        super.getPrioritizedTasksTEST();
+        super.getPrioritizedTasksTest();
     }
 }

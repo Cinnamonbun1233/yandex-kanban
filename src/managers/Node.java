@@ -3,7 +3,6 @@ package managers;
 import java.util.Objects;
 
 public class Node<Task> {
-
     Node<Task> previous;
     Task current;
     Node<Task> next;
@@ -38,18 +37,12 @@ public class Node<Task> {
         this.next = next;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Node<?> node = (Node<?>) o;
-        return Objects.equals(previous, node.previous) && Objects.equals(current, node.current) &&
-                Objects.equals(next, node.next);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(previous, current, next);
+        Node<Task> node = (Node<Task>) o;
+        return Objects.equals(previous, node.previous) && Objects.equals(current, node.current)
+                && Objects.equals(next, node.next);
     }
 }

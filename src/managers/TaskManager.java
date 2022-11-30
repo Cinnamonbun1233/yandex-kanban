@@ -10,17 +10,17 @@ import java.util.TreeSet;
 
 public interface TaskManager {
 
-    void createTask(Task task);
+    void addTask(Task task);
 
-    void createEpic(Epic epic);
+    void addEpic(Epic epic);
 
-    void createSubTask(SubTask subTask);
+    void addSubTask(SubTask subTask);
 
-    void deleteAllTasks();
+    void deleteAllTask();
 
-    void deleteAllEpics();
+    void deleteAllEpic();
 
-    void deleteAllSubTasks();
+    void deleteAllSubTask();
 
     void deleteTaskById(Integer Id);
 
@@ -40,15 +40,15 @@ public interface TaskManager {
 
     void updateSubTask(Integer taskID, SubTask newTaskObject);
 
-    HashMap<Integer, Task> printAllTasks();
+    HashMap<Integer, Task> viewAllTask();
 
-    HashMap<Integer, Epic> printAllEpics();
+    HashMap<Integer, Epic> viewAllEpic();
 
-    HashMap<Integer, SubTask> printAllSubtasks();
+    HashMap<Integer, SubTask> viewAllSubtask();
 
-    HashMap<Integer, SubTask> printSubTasksOfEpic(Integer epicID);
+    HashMap<Integer, SubTask> viewSubTaskOfEpic(Integer epicID);
 
-    List<Task> getHistory();
+    List<Task> getTaskHistory();
 
     TreeSet<Task> getPrioritizedTasks();
 }

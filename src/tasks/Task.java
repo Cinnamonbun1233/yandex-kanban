@@ -3,19 +3,18 @@ package tasks;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public class Task {
+    private Integer id;
     private Type type;
-    private Integer id = 1;
     private String title;
     private String description;
     private Status status;
     private Duration duration;
     private LocalDateTime startTime;
 
-    public Task(Type type, String title, Status status, LocalDateTime startTime,
-                Duration duration, String description) {
+    public Task(Type type, String title, Status status, LocalDateTime startTime, Duration duration,
+                String description) {
         this.type = type;
         this.title = title;
         this.status = status;
@@ -93,46 +92,29 @@ public class Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy|HH:mm");
-        String dateTime;
-        String status;
-        String duration;
-
-        if (this.startTime == null) {
-            dateTime = "null";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" dd.MM.yyyy | HH:mm ");
+        String formatDateTime;
+        if (startTime == null) {
+            formatDateTime = "null";
         } else {
-            dateTime = this.startTime.format(formatter);
+            formatDateTime = startTime.format(formatter);
         }
 
-        if (this.status == null) {
-            status = "null";
+        String taskStatus;
+        if (status == null) {
+            taskStatus = "null";
         } else {
-            status = this.status.toString();
+            taskStatus = status.toString();
         }
 
-        if (this.duration == null) {
-            duration = "null";
+        String taskDuration;
+        if (duration == null) {
+            taskDuration = "null";
         } else {
-            duration = this.duration.toString();
+            taskDuration = duration.toString();
         }
 
-        return String.join(",", id.toString(), type.toString(), title, status, dateTime,
-                duration, description);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return type == task.type && Objects.equals(id, task.id) &&
-                Objects.equals(title, task.title) && Objects.equals(description, task.description) &&
-                status == task.status && Objects.equals(duration, task.duration) &&
-                Objects.equals(startTime, task.startTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, id, title, description, status, duration, startTime);
+        return String.join(",", id.toString(), type.toString(), title, taskStatus, formatDateTime,
+                taskDuration, description);
     }
 }

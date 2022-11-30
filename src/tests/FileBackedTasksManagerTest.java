@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FileBackedTasksManagerTest extends TaskManagerTest {
+
 
     TaskManager createTaskManager() {
         return new FileBackedTasksManager(new File("src/data", "data.csv"));
@@ -17,126 +19,128 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
 
     @AfterEach
     void clear() {
-        taskManager.deleteAllTasks();
-        taskManager.deleteAllSubTasks();
-        taskManager.deleteAllEpics();
+        taskManager.deleteAllTask();
+        taskManager.deleteAllSubTask();
+        taskManager.deleteAllEpic();
+    }
+
+
+    @Test
+    void saveAndLoadFileWithEmptyHistory() {
+        taskManager.addTask(task1);
+        assertTrue(taskManager.getTaskHistory().isEmpty(), "история не пуста");
+        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
+        assertTrue(taskManager2.getTaskHistory().isEmpty(), "история не пуста");
+        assertFalse(taskManager2.viewAllTask().isEmpty(), "таск не восстановился");
+    }
+
+
+    @Test
+    void saveAndLoadFileWithEmptyEpic() {
+        taskManager.addEpic(epic3);
+        assertTrue(taskManager.getTaskHistory().isEmpty(), "история не пуста");
+        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
+        assertTrue(taskManager2.getTaskHistory().isEmpty(), "история не пуста");
+        assertFalse(taskManager2.viewAllEpic().isEmpty(), "таск не восстановился");
     }
 
     @Test
-    void SaveAndLoadFileWithEmptyHistory() {
-        taskManager.createTask(task1);
-        assertTrue(taskManager.getHistory().isEmpty(), "история не пуста");
+    void saveAndLoadFileWithEmptyTasks() {
+        assertTrue(taskManager.viewAllTask().isEmpty(), "таски не пусты");
+        assertTrue(taskManager.viewAllEpic().isEmpty(), "таски не пусты");
+        assertTrue(taskManager.viewAllSubtask().isEmpty(), "таски не пусты");
         TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
-        assertTrue(taskManager2.getHistory().isEmpty(), "история не пуста");
-        assertFalse(taskManager2.printAllTasks().isEmpty(), "таск не восстановился");
-    }
-
-    @Test
-    void SaveAndLoadFileWithEmptyEpic() {
-        taskManager.createEpic(epic3);
-        assertTrue(taskManager.getHistory().isEmpty(), "история не пуста");
-        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
-        assertTrue(taskManager2.getHistory().isEmpty(), "история не пуста");
-        assertFalse(taskManager2.printAllEpics().isEmpty(), "таск не восстановился");
-    }
-
-    @Test
-    void SaveAndLoadFileWithEmptyTasks() {
-        assertTrue(taskManager.printAllTasks().isEmpty(), "таски не пусты");
-        assertTrue(taskManager.printAllEpics().isEmpty(), "таски не пусты");
-        assertTrue(taskManager.printAllSubtasks().isEmpty(), "таски не пусты");
-        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
-        assertTrue(taskManager2.getHistory().isEmpty(), "история не пуста");
-        assertTrue(taskManager2.printAllEpics().isEmpty(), "список пуст");
+        assertTrue(taskManager2.getTaskHistory().isEmpty(), "история не пуста");
+        assertTrue(taskManager2.viewAllEpic().isEmpty(), "список пуст");
     }
 
     @Test
     void addEpicTEST() {
-        super.addEpicTEST();
+        super.addEpicTest();
     }
 
     @Test
     void addSubTaskTEST() {
-        super.addSubTaskTEST();
+        super.addSubTaskTest();
     }
 
     @Test
     void deleteAllTaskTEST() {
-        super.deleteAllTaskTEST();
+        super.deleteAllTaskTest();
     }
 
     @Test
     void deleteAllEpicTEST() {
-        super.deleteAllEpicTEST();
+        super.deleteAllEpicTest();
     }
 
     @Test
     void deleteAllSubTaskTEST() {
-        super.deleteAllSubTaskTEST();
+        super.deleteAllSubTaskTest();
     }
 
     @Test
     void deleteTaskByIdTEST() {
-        super.deleteTaskByIdTEST();
+        super.deleteTaskByIdTest();
     }
 
     @Test
     void deleteEpicByIdTEST() {
-        super.deleteEpicByIdTEST();
+        super.deleteEpicByIdTest();
     }
 
     @Test
     void deleteSubTaskByIdTEST() {
-        super.deleteSubTaskByIdTEST();
+        super.deleteSubTaskByIdTest();
     }
 
     @Test
     void getTaskByIdTEST() {
-        super.getTaskByIdTEST();
+        super.getTaskByIdTest();
     }
 
     @Test
     void getEpicByIdTEST() {
-        super.getEpicByIdTEST();
+        super.getEpicByIdTest();
     }
 
     @Test
     void getSubTaskByIdTEST() {
-        super.getSubTaskByIdTEST();
+        super.getSubTaskByIdTest();
     }
 
     @Test
     void updateTaskTEST() {
-        super.updateTaskTEST();
+        super.updateTaskTest();
     }
 
     @Test
     void updateEpicTEST() {
-        super.updateEpicTEST();
+        super.updateEpicTest();
     }
 
     @Test
     void updateSubTaskTEST() {
-        super.updateSubTaskTEST();
+        super.updateSubTaskTest();
     }
 
     @Test
     void viewAllTaskTEST() {
-        super.viewAllTaskTEST();
+        super.viewAllTaskTest();
     }
 
     @Test
     void viewSubTaskOfEpicTEST() {
-        super.viewSubTaskOfEpicTEST();
+        super.viewSubTaskOfEpicTest();
     }
 
     @Test
     void getTaskHistoryTEST() {
-        super.getTaskHistoryTEST();
+        super.getTaskHistoryTest();
     }
 
     @Test
     void getPrioritizedTasksTEST() {
-        super.getPrioritizedTasksTEST();
+        super.getPrioritizedTasksTest();
     }
 }

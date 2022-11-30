@@ -15,8 +15,8 @@ import java.util.StringJoiner;
 import static java.nio.file.Files.createDirectory;
 
 public class FileBackedTasksManager extends InMemoryTaskManager implements TaskManager {
-    final String HEAD_SAVE_FILE = "id,type,name,status,description,startTime,duration,epic";
-    final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy|HH:mm");
+    final String HEAD_SAVE_FILE = "id, type, name, status, description, startTime, duration, epic";
+    final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(" dd.MM.yyyy | HH:mm ");
     private final File fileForSave;
 
     public FileBackedTasksManager(File fileForSave) {
@@ -42,7 +42,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         String home = fileForSave.getParent();
         String FileName = fileForSave.getName();
         System.out.println("Проверяем директорию:");
-
         if (Files.exists(Paths.get(home))) {
             System.out.println("директория существует");
         } else {
@@ -58,7 +57,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         if (Files.exists(Paths.get(home, FileName))) {
             System.out.println("файл существует");
         } else {
-            System.out.println("файл не существует, пробуем создать новый файл");
+            System.out.println("файла не существует, пробуем создать новый файл");
             try {
                 Files.createFile(Paths.get(home, "data.csv"));
             } catch (IOException e) {
@@ -181,7 +180,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
                 subTask.setId(id);
                 subTasks.put(subTask.getId(), subTask);
                 Epic epic = epics.get(epicId);
-                epic.addSubtaskToEpic(subTask);
+                epic.addNewSubtaskInEpic(subTask);
                 if (this.id < subTask.getId()) {
                     this.id = subTask.getId() + 1;
                 }
@@ -207,38 +206,38 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
     }
 
     @Override
-    public void createTask(Task task) {
-        super.createTask(task);
+    public void addTask(Task task) {
+        super.addTask(task);
         save();
     }
 
     @Override
-    public void createEpic(Epic epic) {
-        super.createEpic(epic);
+    public void addEpic(Epic epic) {
+        super.addEpic(epic);
         save();
     }
 
     @Override
-    public void createSubTask(SubTask subTask) {
-        super.createSubTask(subTask);
+    public void addSubTask(SubTask subTask) {
+        super.addSubTask(subTask);
         save();
     }
 
     @Override
-    public void deleteAllTasks() {
-        super.deleteAllTasks();
+    public void deleteAllTask() {
+        super.deleteAllTask();
         save();
     }
 
     @Override
-    public void deleteAllEpics() {
-        super.deleteAllEpics();
+    public void deleteAllEpic() {
+        super.deleteAllEpic();
         save();
     }
 
     @Override
-    public void deleteAllSubTasks() {
-        super.deleteAllSubTasks();
+    public void deleteAllSubTask() {
+        super.deleteAllSubTask();
         save();
     }
 
