@@ -7,11 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FileBackedTasksManagerTest extends TaskManagerTest {
 
+    String HISTORY_IS_NOT_EMPTY = "история не пуста";
+    String TASK_NOT_RESTORED = "таск не восстановился";
 
     TaskManager createTaskManager() {
         return new FileBackedTasksManager(new File("src/data", "data.csv"));
@@ -24,33 +25,29 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
         taskManager.deleteAllEpic();
     }
 
-
     @Test
     void saveAndLoadFileWithEmptyHistory() {
         taskManager.addTask(task1);
-        assertTrue(taskManager.getTaskHistory().isEmpty(), "история не пуста");
+        assertTrue(taskManager.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
         TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
-        assertTrue(taskManager2.getTaskHistory().isEmpty(), "история не пуста");
-        assertFalse(taskManager2.viewAllTask().isEmpty(), "таск не восстановился");
+        assertTrue(taskManager2.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
+        assertFalse(taskManager2.viewAllTask().isEmpty(), TASK_NOT_RESTORED);
     }
-
 
     @Test
     void saveAndLoadFileWithEmptyEpic() {
         taskManager.addEpic(epic3);
-        assertTrue(taskManager.getTaskHistory().isEmpty(), "история не пуста");
+        assertTrue(taskManager.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
         TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
-        assertTrue(taskManager2.getTaskHistory().isEmpty(), "история не пуста");
-        assertFalse(taskManager2.viewAllEpic().isEmpty(), "таск не восстановился");
+        assertTrue(taskManager2.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
+        assertFalse(taskManager2.viewAllEpic().isEmpty(), TASK_NOT_RESTORED);
     }
 
     @Test
     void saveAndLoadFileWithEmptyTasks() {
-        assertTrue(taskManager.viewAllTask().isEmpty(), "таски не пусты");
-        assertTrue(taskManager.viewAllEpic().isEmpty(), "таски не пусты");
-        assertTrue(taskManager.viewAllSubtask().isEmpty(), "таски не пусты");
+        assertAll(() -> assertTrue(taskManager.viewAllTask().isEmpty(), "таски не пусты"));
         TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
-        assertTrue(taskManager2.getTaskHistory().isEmpty(), "история не пуста");
+        assertTrue(taskManager2.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
         assertTrue(taskManager2.viewAllEpic().isEmpty(), "список пуст");
     }
 

@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class InMemoryHistoryManagerTest {
     TaskManager manager = getDefault();
     HistoryManager historyManager = getDefaultHistory();
+
+    //нужна помощь, у меня пятничная тупка, не понимаю, что именно надо перенести в BeforeAl :)
     Task task1 = new Task(Type.TASK, "Тестовый таск 1", Status.NEW, LocalDateTime.of(2001, 1,
             1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 1");
     Task task2 = new Task(Type.TASK, "Тестовый таск 2", Status.NEW, LocalDateTime.of(2006, 1,
@@ -32,6 +34,10 @@ class InMemoryHistoryManagerTest {
         manager.deleteAllTask();
         manager.deleteAllSubTask();
         manager.deleteAllEpic();
+        historyManager.remove(1);
+        historyManager.remove(2);
+        historyManager.remove(3);
+        historyManager.remove(4);
     }
 
     @Test
