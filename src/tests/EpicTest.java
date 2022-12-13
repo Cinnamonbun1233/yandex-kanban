@@ -42,9 +42,9 @@ class EpicTest {
     @Test
     void epicStatusWithSubTasksStatusNew() {
         taskManager.addEpic(epic);
-        subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.NEW, LocalDateTime.of(2009,
-                1, 1, 1, 1, 1), Duration.ofMinutes(20),
-                "Описание тестового сабтаска 1", 1);
+        subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.NEW,
+                LocalDateTime.of(2009, 1, 1, 1, 1, 1),
+                Duration.ofMinutes(20), "Описание тестового сабтаска 1", 1);
         taskManager.addSubTask(subTask1);
         assertEquals(Status.NEW, epic.getStatus());
     }
@@ -53,8 +53,8 @@ class EpicTest {
     void epicStatusWithSubTasksStatusInProgress() {
         epic.setId(1);
         subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.IN_PROGRESS,
-                LocalDateTime.of(2009, 1, 1, 1, 1, 1), Duration.ofMinutes(20),
-                "Описание тестового сабтаска 1", 1);
+                LocalDateTime.of(2009, 1, 1, 1, 1, 1),
+                Duration.ofMinutes(20), "Описание тестового сабтаска 1", 1);
         subTask1.setId(3);
         epic.addNewSubtaskInEpic(subTask1);
         assertEquals(Status.IN_PROGRESS, epic.getStatus());
@@ -63,9 +63,9 @@ class EpicTest {
     @Test
     void epicStatusWithSubTasksStatusDone() {
         epic.setId(1);
-        subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.DONE, LocalDateTime.of(2009,
-                1, 1, 1, 1, 1), Duration.ofMinutes(20),
-                "Описание тестового сабтаска 1", 1);
+        subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.DONE,
+                LocalDateTime.of(2009, 1, 1, 1, 1, 1),
+                Duration.ofMinutes(20), "Описание тестового сабтаска 1", 1);
         subTask1.setId(3);
         epic.addNewSubtaskInEpic(subTask1);
         assertEquals(Status.DONE, epic.getStatus());
@@ -74,13 +74,13 @@ class EpicTest {
     @Test
     void epicStatusWithSubTasksStatusNewOrDone() {
         epic.setId(1);
-        subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.NEW, LocalDateTime.of(2009,
-                1, 1, 1, 1, 1), Duration.ofMinutes(20),
-                "Описание тестового сабтаска 1", 1);
+        subTask1 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.NEW,
+                LocalDateTime.of(2009, 1, 1, 1, 1, 1),
+                Duration.ofMinutes(20), "Описание тестового сабтаска 1", 1);
         subTask1.setId(2);
-        subTask2 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.DONE, LocalDateTime.of(2009,
-                1, 1, 1, 1, 1), Duration.ofMinutes(20),
-                "Описание тестового сабтаска 1", 1);
+        subTask2 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.DONE,
+                LocalDateTime.of(2009, 1, 1, 1, 1, 1),
+                Duration.ofMinutes(20), "Описание тестового сабтаска 1", 1);
         subTask1.setId(3);
         epic.addNewSubtaskInEpic(subTask1);
         epic.addNewSubtaskInEpic(subTask2);

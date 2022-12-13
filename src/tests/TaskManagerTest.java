@@ -14,22 +14,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 abstract class TaskManagerTest<T extends TaskManager> {
     public T taskManager;
-    Task task1 = new Task(Type.TASK, "Тестовый таск 1", Status.NEW, LocalDateTime.of(2001, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 1");
-    Task task2 = new Task(Type.TASK, "Тестовый таск 2", Status.NEW, LocalDateTime.of(2006, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 2");
-    Task task3 = new Task(Type.TASK, "Тестовый таск 3", Status.NEW, LocalDateTime.of(2003, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 3");
-    Task task4 = new Task(Type.TASK, "Тестовый таск 4", Status.NEW, LocalDateTime.of(2004, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 4");
-    Epic epic3 = new Epic(Type.EPIC, "Тестовый эпик 1", "Описание тестового эпика 1", Status.NEW);
-    Epic epic4 = new Epic(Type.EPIC, "Тестовый эпик 2", "Описание тестового эпика 2", Status.NEW);
-    SubTask subtask4 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.DONE, LocalDateTime.of(2009,
-            1, 1, 1, 1, 1), Duration.ofMinutes(20),
-            "Описание тестового сабтаска 1", 1);
-    SubTask subtask5 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 2", Status.DONE, LocalDateTime.of(2010,
-            1, 1, 1, 1, 1), Duration.ofMinutes(20),
-            "Описание тестового сабтаска 2", 1);
+    Task task1 = new Task(Type.TASK, "Тестовый таск 1", Status.NEW,
+            LocalDateTime.of(2001, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Task task2 = new Task(Type.TASK, "Тестовый таск 2",
+            Status.NEW, LocalDateTime.of(2006, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Task task3 = new Task(Type.TASK, "Тестовый таск 3", Status.NEW,
+            LocalDateTime.of(2003, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Task task4 = new Task(Type.TASK, "Тестовый таск 4", Status.NEW,
+            LocalDateTime.of(2004, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Epic epic3 = new Epic(Type.EPIC, "Тестовый эпик 1", "Описание тестового эпика",
+            Status.NEW);
+    Epic epic4 = new Epic(Type.EPIC, "Тестовый эпик 2", "Описание тестового эпика",
+            Status.NEW);
+    SubTask subtask4 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 1", Status.DONE,
+            LocalDateTime.of(2009, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового сабтаска", 1);
+    SubTask subtask5 = new SubTask(Type.SUBTASK, "Тестовый сабтаск 2", Status.DONE,
+            LocalDateTime.of(2010, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового сабтаска", 1);
 
     abstract T createTaskManager();
 

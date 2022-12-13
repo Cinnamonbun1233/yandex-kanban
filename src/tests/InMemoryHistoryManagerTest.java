@@ -11,33 +11,31 @@ import tasks.Type;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static managers.Managers.getDefault;
 import static managers.Managers.getDefaultHistory;
+import static managers.Managers.getFileBackedTasksManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryHistoryManagerTest {
-    TaskManager manager = getDefault();
+    TaskManager manager = getFileBackedTasksManager();
     HistoryManager historyManager = getDefaultHistory();
-
-    //нужна помощь, у меня пятничная тупка, не понимаю, что именно надо перенести в BeforeAl :)
-    Task task1 = new Task(Type.TASK, "Тестовый таск 1", Status.NEW, LocalDateTime.of(2001, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 1");
-    Task task2 = new Task(Type.TASK, "Тестовый таск 2", Status.NEW, LocalDateTime.of(2006, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 2");
-    Task task3 = new Task(Type.TASK, "Тестовый таск 3", Status.NEW, LocalDateTime.of(2003, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 3");
-    Task task4 = new Task(Type.TASK, "Тестовый таск 4", Status.NEW, LocalDateTime.of(2004, 1,
-            1, 1, 1, 1), Duration.ofMinutes(20), "Описание тестового таска 4");
+    Task task1 = new Task(Type.TASK, "Тестовый таск 1", Status.NEW,
+            LocalDateTime.of(2001, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Task task2 = new Task(Type.TASK, "Тестовый таск 2", Status.NEW,
+            LocalDateTime.of(2006, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Task task3 = new Task(Type.TASK, "Тестовый таск 3", Status.NEW,
+            LocalDateTime.of(2003, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
+    Task task4 = new Task(Type.TASK, "Описание тестового таска 4", Status.NEW,
+            LocalDateTime.of(2004, 1, 1, 1, 1, 1),
+            Duration.ofMinutes(20), "Описание тестового таска");
 
     @AfterEach
     void clear() {
         manager.deleteAllTask();
         manager.deleteAllSubTask();
         manager.deleteAllEpic();
-        historyManager.remove(1);
-        historyManager.remove(2);
-        historyManager.remove(3);
-        historyManager.remove(4);
     }
 
     @Test

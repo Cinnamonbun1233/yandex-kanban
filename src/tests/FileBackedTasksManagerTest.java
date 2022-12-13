@@ -15,7 +15,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
     String TASK_NOT_RESTORED = "таск не восстановился";
 
     TaskManager createTaskManager() {
-        return new FileBackedTasksManager(new File("src/data", "data.csv"));
+        return new FileBackedTasksManager();
     }
 
     @AfterEach
@@ -29,7 +29,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
     void saveAndLoadFileWithEmptyHistory() {
         taskManager.addTask(task1);
         assertTrue(taskManager.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
-        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
+        TaskManager taskManager2 = new FileBackedTasksManager();
         assertTrue(taskManager2.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
         assertFalse(taskManager2.viewAllTask().isEmpty(), TASK_NOT_RESTORED);
     }
@@ -38,7 +38,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
     void saveAndLoadFileWithEmptyEpic() {
         taskManager.addEpic(epic3);
         assertTrue(taskManager.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
-        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
+        TaskManager taskManager2 = new FileBackedTasksManager();
         assertTrue(taskManager2.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
         assertFalse(taskManager2.viewAllEpic().isEmpty(), TASK_NOT_RESTORED);
     }
@@ -46,7 +46,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
     @Test
     void saveAndLoadFileWithEmptyTasks() {
         assertAll(() -> assertTrue(taskManager.viewAllTask().isEmpty(), "таски не пусты"));
-        TaskManager taskManager2 = new FileBackedTasksManager(new File("src/data", "data.csv"));
+        TaskManager taskManager2 = new FileBackedTasksManager();
         assertTrue(taskManager2.getTaskHistory().isEmpty(), HISTORY_IS_NOT_EMPTY);
         assertTrue(taskManager2.viewAllEpic().isEmpty(), "список пуст");
     }
