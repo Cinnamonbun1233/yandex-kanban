@@ -29,33 +29,33 @@ public class KVServer {
         return URI.create("http://localhost:" + PORT);
     }
 
-    private void load(HttpExchange h) {
-        try (h) {
+    private void load(HttpExchange httpExchange) {
+        try (httpExchange) {
             System.out.println("KVServer: /load");
-            if (!hasAuth(h)) {
+            if (!hasAuth(httpExchange)) {
                 System.out.println("KVServer: запрос не авторизован, нужен параметр в query API_TOKEN со значением " +
                         "апи-ключа");
-                h.sendResponseHeaders(403, 0);
+                httpExchange.sendResponseHeaders(403, 0);
                 return;
             }
-            if ("GET".equals(h.getRequestMethod())) {
-                String key = h.getRequestURI().getPath().substring("/load/".length());
+            if ("GET".equals(httpExchange.getRequestMethod())) {
+                String key = httpExchange.getRequestURI().getPath().substring("/load/".length());
                 if (key.isEmpty()) {
                     System.out.println("KVServer: Key для получения пустой. key указывается в пути: /load/{key}");
-                    h.sendResponseHeaders(400, 0);
+                    httpExchange.sendResponseHeaders(400, 0);
                     return;
                 }
                 if (data.containsKey(key)) {
-                    sendText(h, " ");
+                    sendText(httpExchange, " ");
                     System.out.println("KVServer: значение ключа " + key + " отправлено");
-                    h.sendResponseHeaders(200, 0);
+                    httpExchange.sendResponseHeaders(200, 0);
                 } else {
                     System.out.println("KVServer: ключа " + key + " нет");
-                    h.sendResponseHeaders(404, 0);
+                    httpExchange.sendResponseHeaders(404, 0);
                 }
             } else {
-                System.out.println("KVServer: /load ждёт GET-запрос, а получил: " + h.getRequestMethod());
-                h.sendResponseHeaders(405, 0);
+                System.out.println("KVServer: /load ждёт GET-запрос, а получил: " + httpExchange.getRequestMethod());
+                httpExchange.sendResponseHeaders(405, 0);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

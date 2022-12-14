@@ -26,7 +26,7 @@ public class KVTaskClient {
         HttpResponse.BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
         HttpResponse<String> response = client.send(httpRequest, handler);
         if (response.statusCode() != 200) {
-            throw new RuntimeException("Не удается обработать запрос /register");
+            throw new RuntimeException("unable to process request /register");
         }
         return response.body();
     }
@@ -47,7 +47,7 @@ public class KVTaskClient {
                     .build();
             HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             System.out.println(response);
-            System.out.println("CLIENT:запрос сохранения отправлен");
+            System.out.println("CLIENT: the save request has been sent");
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

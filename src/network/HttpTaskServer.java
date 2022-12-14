@@ -20,7 +20,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class HttpTaskServer {
-    private static final int PORT = 8081;
+    private static final int PORT = 8080;
     HttpServer httpServer;
 
     public HttpTaskServer(TaskManager httpManager) throws IOException {
@@ -116,6 +116,7 @@ public class HttpTaskServer {
                         httpExchange.sendResponseHeaders(200, 0);
                     }
                     break;
+
                 case "POST":
                     String body = new String(httpExchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
                     if (path.contains("/task/")) {
