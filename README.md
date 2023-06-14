@@ -1,4 +1,4 @@
-# java-kanban
+# kanban
 
 ### Project description
 A task manager for managing deadlines and tasks for a development team.
